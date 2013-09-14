@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>Placity 2.0</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        
+        <script id="start-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"><button type="button" class="help" id="help_start"></button></header>
+            <div class="FEATURE_BAR">
+                <div id="user">
+                    <div class="thumbnail"></div>
+                    <div id="start_account"><div>Hallo <span class="username"></span>!<br><button type="button" class="link gray" id="chg_acc">Account wechseln</button></div></div>
+                </div>
+            </div>
+            <div class="SCROLL_FRAME start_bg full">
+                <div id="floater_start"></div>
+                <section id="start_buttons">
+                    <button type="button" class="button start" id="scan">START<br><span class="buttontext">Ein Spiel herunterladen oder starten</span></button>
+                    <button type="button" class="button start" id="settings">OPTIONEN<br><span class="buttontext">Einstellungen verändern</span></button>
+                    <button type="button" class="button start" id="info">INFO<br><span class="buttontext">Über das Projekt und die Partner</span></button>
+                </section>
+            </div>
+        </script>
+        
+        <script id="info-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"><button type="button" class="help" id="help_info"></button></header>
+            <div class="FEATURE_BAR"></div>
+            <header class="NAV_BAR"><button type="button" class="button left link" id="start">Start</button></header>
+            <div class="SCROLL_FRAME start_bg full">
+                <div id="floater_settings"></div>
+                <section id="infoframe">
+                    <section id="about">
+                        Placity ist ein Produkt des
+                        <img class="image" src="Assets/By.png"/><br>
+                        Team:<br>
+                        Niels Münzenberger<br>
+                        Benedikt Dassler<br>
+                        Fabian Kögel<br>
+                        Johannes Schantz<br>
+                        Leonard Nürnberg<br><br>
+                        © 2013 Kaiserdom APP Project
+                    </section>
+                </section>
+            </div>
+        </script>
+        
+        <script id="settings-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"><button type="button" class="help" id="help_settings"></button></header>
+            <div class="FEATURE_BAR"></div>
+            <header class="NAV_BAR"><button type="button" class="button left link" id="start">Start</button></header>
+            <div class="SCROLL_FRAME start_bg full">
+                <div id="floater_settings"></div>
+                <section id="settingsframe">
+                    <section id="setting">
+                    <!--<input type="text" class="settings_input" id="usernameIn" />
+                    <button type="button" class="button submit" id="setName"></button>
+                    
+                    <label>Mobile Videos einschalten</label><input type="checkbox" class="settings_checkbox" id="mobileVideo" />-->
+                        <div class="settings_container">
+                            <h1>Netzwerk:</h1>
+                            <label class="settings_label">Mobile Video:</label><input type="checkbox" class="settings_checkbox" id="mobileVideo" />
+                            <div class="clearfix"></div> 
+                        </div>
+                        <div class="settings_container">
+                            <h1>Speicherplatz:</h1>
+                            <!--<div class="progressBar"><div>50%</div></div>-->
+                            <!--<label class="settings_label">Spiele löschen:</label><button type="button" class="button" id="dropAll"></button>-->
+                            <ul id="settings_gamelist">
+                            
+                            </ul>
+                            <div class="clearfix"></div> 
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </script>
+        
+        <script id="settings-li-tpl" type="text/x-handlebars-template">
+            <li>{{name}}<button type="button" class="button drop" onclick="app.showDialog('Das Spiel wird gelöscht! Dieser Schritt ist irreversibel!', function(code){if (code != 1) {app.dataInterface.dropGame({{id}},function() {app.showAlert('Game gelöscht!', 'Fertig!')});app.currentPage.renderList();}}, 'Sicher?', ['Abbrechen', 'Löschen'])"></button></li>
+        </script>
+        
+        <script id="scan-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+             <header class="NAV_BAR">
+                 <button type="button" class="button right link" id="list">Gameliste</button>
+                 <button type="button" class="button left link" id="start">Start</button>
+            </header>
+            <div class="SCROLL_FRAME full">
+                <div class="STATUS_BAR"></div>
+                <button type="button" class="button scan" id="game_request"><img src="Assets/Scan.svg" /><br>Code scannen</button>
+                <button type="button" class="button gamelist" id="list"><img src="Assets/Play.svg" /><br>Spiel starten</button>
+            </div>
+        </script>
+        
+        <script id="radar-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+            <header class="NAV_BAR"><a class="button right" href="#scan">Scan</a></header>
+            <div class="SCROLL_FRAME">
+            <div class="content">
+                <div id="map_canvas"></div>
+            </div>
+            </div>
+        </script>
+        
+        <script id="map-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+            <header class="NAV_BAR"><button type="button" class="button left link" id="ingame">Ingame</button></header>
+            <div class="SCROLL_FRAME">
+            <div class="content">
+                
+            </div>
+            </div>
+        </script>
+        
+        <script id="list-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+            <header class="NAV_BAR"><button type="button" class="button left link" id="scan-btn">Scan</button></header>
+            <div class="SCROLL_FRAME full">
+                <ul id="gamelist">
+                </ul>
+            </div>
+        </script>
+        
+        <script id="account-tpl" type="text/x-handlebars-template">
+            <div class="popup-background"></div>
+            <div class="popup-close">Schließen</div>
+            <div class="popup-content">
+                <div id="popup-wrap">
+                    <h1>Account wechseln</h1>
+                    <input type="text" class="settings_input" id="usernameIn" placeholder="Name"/>
+                    <button type="button" class="button submit" id="setName"></button>
+                    <br>Der Accountname wird nur lokal verwendet. Es gibt momentan keine Verknüpfung mit Highscorelisten im Internet.
+                </div>
+            </div>
+        </script>
+        
+        <script id="setup-tpl" type="text/x-handlebars-template">
+            <div class="popup-background"></div>
+            <div class="popup-close">Schließen</div>
+            <div class="popup-content">
+            </div>
+        </script>
+        
+        <script id="help-tpl" type="text/x-handlebars-template">
+            <div class="popup-background"></div>
+            <div class="popup-close">Schließen</div>
+            <div class="popup-content">
+                <div id="popup-wrap">
+                    <h1>Hilfe</h1>
+                    {{breaklines txt}}
+                </div>
+            </div>
+        </script>
+        
+        <script id="impressum-tpl" type="text/x-handlebars-template">
+            <div class="popup-background"></div>
+            <div class="popup-close">Schließen</div>
+            <div class="popup-content">
+                <div id="popup-wrap">
+                    <h1>Impressum</h1>
+                    <div><center>{{breaklines txt}}</center></div>
+                </div>
+            </div>
+        </script>
+        
+        <script id="download-tpl" type="text/x-handlebars-template">
+            <div class="popup-background"></div>
+            <div class="popup-close">Schließen</div>
+            <div class="popup-content">
+                <div class="wrapper">
+                    <img class="DOWNLOAD_img" />
+                    <h1 class="DOWNLOAD_name">Game Name</h1>
+                    <div id="DOWNLOAD-wrap"><div class="DOWNLOAD_desc"></div></div>
+                    <section class="DOWNLOAD_infoarea">
+                        <i class="DOWNLOAD_gameinfo" id="location">67354</i>
+                        <i class="DOWNLOAD_gameinfo" id="filesize">2mb</i>
+                    </section>
+                    <section class="DOWNLOAD_buttons">
+                        <button type="button" class="button play" id="play">Spielen!</button>
+                        <button type="button" class="button update" id="update">Aktualisieren!</button>
+                        <button type="button" class="button download" id="download">Herunterladen!</button>
+                    </section>
+                </div>
+            </div>
+        </script>
+        
+        <script id="menu-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+            <div id="menu_close" class="SCROLL_FRAME"></div>
+            <div id="menuarea">
+                <ul>
+                    <li id="menuStart" class="menuitem" onclick="window.location.hash='#'">Start</li>
+                    <li id="menuSettings" class="menuitem" onclick="window.location.hash='#settings'">Settings</li>
+                    <li id="progress" class="menuitem"></li>
+                </ul>
+            </div>
+        </script>        
+        
+        <script id="ingame-tpl" type="text/x-handlebars-template">
+            <header class="TOP_BAR"></header>
+            <header class="NAV_BAR">
+                <!--<button type="button" class="button right link" id="map">Map</button>-->
+                <button type="button" class="button left link" id="menu">Menü</button>
+            </header>
+            <div class="SCROLL_FRAME">
+                <div class="content">
+                </div>
+            </div>
+            <button type="button" class="button hint" id="help"></button>
+            <div id="pointalert"></div>
+            <footer class="BOTTOM_BAR">
+                <div id="points"></div>
+                <button type="button" class="button disabled" id="impressum">Impressum</button>
+                <button type="button" class="button disabled" id="end">Ende</button>
+                <button type="button" class="button left link" id="lastScreen">Zurück</button>
+                <button type="button" class="button right link" id="nextScreen">Weiter</button>
+            </footer>
+            <section id="menuarea" class="SIDEBAR off">
+                <ul>
+                    <li id="menuStart" class="menuitem" onclick="window.location.hash='#'">Start</li>
+                    <li id="menuSettings" class="menuitem" onclick="window.location.hash='#settings'">Optionen</li>
+                    <li id="progress" class="menuitem"><span>Fortschritt:</span><br>1/20</li>
+                </ul>
+            </section>
+        </script>
+        
+        <script id="list-li-tpl" type="text/x-handlebars-template">
+            <li><a class="listli" href="#ingame{{id}}"><img class="list-image" style="background-image: url({{image}})"/><div class="list-text"><h1>{{name}}</h1><span>{{description}}</span></div></a></li>
+        </script>
+        
+        <script id="content-txt-tpl" type="text/x-handlebars-template">
+            <div class="contents content_txt" id="{{content_id}}">
+                {{txt}}
+            </div>
+        </script>
+        
+        <script id="content-txtblock-tpl" type="text/x-handlebars-template">
+            <div class="contents content_txtblock" id="{{content_id}}">
+                {{txt}}
+            </div>
+        </script>
+        
+        <script id="content-dialog-tpl" type="text/x-handlebars-template">
+            <div class="contents content_dialog" id="{{content_id}}">
+                <img class="avatar" src="{{src}}" style="float: {{orientation}};"/>
+                <p class="dialogtxt" style="float: {{orientation}};">{{txt}}</p>
+            </div>
+        </script>
+        
+        <script id="content-img-tpl" type="text/x-handlebars-template">
+            <div class="contents content_img" id="{{content_id}}">
+                <img class="image" src="{{src}}"/>
+                {{txt}}
+            </div>
+        </script>
+        
+        <script id="content-sound-tpl" type="text/x-handlebars-template">
+            <div class="contents content_sound" id="{{content_id}}">
+                <audio class="audio" src="{{src}}" type="mp3"/>
+            </div>
+        </script>
+        
+        <script id="content-video-tpl" type="text/x-handlebars-template">
+            <div class="contents content_video" id="{{content_id}}">
+                <video class="video" src="{{src}}" type="ogg/mp4" controls />
+                {{txt}}   
+            </div>
+        </script>
+        
+        <script id="content-novideo-tpl" type="text/x-handlebars-template">
+            <div class="contents content_novideo" id="{{content_id}}">
+                <div class="novideo"><img src="Assets/Offline.svg" id="video-offline"/><br>Aufgrund der hohen Datenmenge sind Videos nur mit Internetverbindung verfügbar!</div>
+            </div>
+        </script>
+        
+        <script id="content-mobilevideo-tpl" type="text/x-handlebars-template">
+            <div class="contents content_novideo" id="{{content_id}}">
+                <div class="novideo"><img src="Assets/Offline.svg" id="video-offline"/><br>Videos können aufgrund der hohen Datenmenge die mobile Datenverbindung stark belasten!<br><button type="button" class="button rect" id="mobV">Mobile Video freischalten</button><h6>Kann unter Optionen - Mobile Video rückgängig gemacht werden</h6></div>
+            </div>
+        </script>
+        
+        <script id="content-mtch-tpl" type="text/x-handlebars-template">
+            <div class="contents content_mtch" id="{{content_id}}">
+                <p class="question_txt">{{question}}</p>
+                <ul class="answer_list">
+                    {{#each answers}}
+                        <li class="answer">
+                            <input type="checkbox" id="mt{{@index}}" name="mtaw" value="{{value}}"/>
+                            <label for="mt{{@index}}">{{txt}}</label>
+                        </li>
+                    {{/each}}
+                </ul>        
+            </div>
+        </script>
+        
+        <script id="content-sgch-tpl" type="text/x-handlebars-template">
+            <div class="contents content_sgch" id="{{content_id}}">
+                <p class="question_txt">{{question}}</p>
+                <ul class="answer_list">
+                    {{#each answers}}
+                        <li class="answer">
+                            <input type="radio" id="sg{{@index}}" name="sgaw" value="{{value}}"/>
+                            <label for="sg{{@index}}">{{txt}}</label>
+                        </li>
+                    {{/each}}
+                </ul>        
+            </div>
+        </script>
+        
+        <script id="content-input-tpl" type="text/x-handlebars-template">
+            <div class="contents content_input" id="{{content_id}}">
+                <p class="question_txt">{{question}}</p>
+                {{#each answers.[0].txt}}
+                    <input type="{{../input_type}}" class="txt_input" maxlength="1"/>
+                {{/each}}
+            </div>
+        </script>
+        
+        <script id="content-qr-tpl" type="text/x-handlebars-template">
+            <div class="contents content_qr" id="{{content_id}}">
+                <div><button type="button" class="button qr_scan" id="scan-btn"><img src="Assets/Scan.svg" /><br>Code scannen</button></div>  
+            </div>
+        </script>
+        
+        <script id="content-end-tpl" type="text/x-handlebars-template">
+            <div class="contents content_end">
+                <div id="endpoints">{{points}}</div>
+                <h1>{{name}}</h1>
+                <br>
+                <br>
+                <center><p>Du hast {{points}} Punkte erreicht!</p></center>
+            </div>
+        </script>
+        
+        <script id="content-start-tpl" type="text/x-handlebars-template">
+            <div class="contents content_start">
+                <h1>{{name}}</h1>
+                <center><img class="image" src="{{image}}" /></center>
+                <p>{{description}}</p>
+            </div>
+        </script>
+         
+        
+      
+        
+        <script src="phonegap.js"></script>     
+        <script src="barcodescanner.js"></script>
+        <script src="lib/jquery-1.8.2.min.js"></script>
+        <script src="lib/iscroll-min.js"></script>
+        <script src="lib/handlebars.js"></script>
+        <script type='application/javascript' src='lib/fastclick.js'></script>
+        
+        <script src="js/StartView.js"></script>
+        <script src="js/InfoView.js"></script>
+        <script src="js/SettingsView.js"></script>
+        <script src="js/ScanView.js"></script>
+        <script src="js/RadarView.js"></script>
+        <script src="js/ListView.js"></script>
+        <script src="js/MenuView.js"></script>
+        <script src="js/IngameView.js"></script>
+        <script src="js/MapView.js"></script>
+        
+        <script src="js/AccountPopup.js"></script>
+        <script src="js/DownloadPopup.js"></script>
+        <script src="js/SetupPopup.js"></script>
+        <script src="js/HelpPopup.js"></script>
+        <script src="js/ImpressumPopup.js"></script>
+        
+        <script src="interfaces/memory-store.js"></script>
+        <script src="main.js"></script>
+        
+    </body>
+</html>
