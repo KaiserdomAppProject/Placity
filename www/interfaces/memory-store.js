@@ -54,7 +54,7 @@ var MemoryStore = function(successCallback, errorCallback) {
         var self = this;
         $.ajax({
             type: "GET",
-            url: "http://kaiserdomapp.medienundbildung.com/questioneditor/jsondata.php",
+            url: "http://kaiserdomapp.medienundbildung.com/homepage/questioneditor/jsondata.php",
             data: {id:id, command: "info"},
             dataType: "jsonp",
             cache: false,
@@ -75,7 +75,7 @@ var MemoryStore = function(successCallback, errorCallback) {
         var self = this;
         $.ajax({
             type: "GET",
-            url: "http://kaiserdomapp.medienundbildung.com/questioneditor/jsondata.php",
+            url: "http://kaiserdomapp.medienundbildung.com/homepage/questioneditor/jsondata.php",
             data: {id:id},
             dataType: "jsonp",
             cache: false,

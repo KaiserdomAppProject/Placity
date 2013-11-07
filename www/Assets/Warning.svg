@@ -11,10 +11,10 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="20"
-   height="20.299999"
+   height="20"
    id="svg3499"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="Warning.svg">
   <defs
      id="defs3501">
@@ -200,9 +200,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="6.1153478"
-     inkscape:cy="1.023726"
+     inkscape:zoom="22.4"
+     inkscape:cx="11.771822"
+     inkscape:cy="2.8398265"
      inkscape:document-units="px"
      inkscape:current-layer="g4234"
      showgrid="false"
@@ -227,37 +227,31 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1032.0622)">
+     transform="translate(0,-1032.3622)">
     <g
        transform="matrix(0.03538063,0,0,0.03538063,103.38929,960.68672)"
        id="g4234">
       <g
-         transform="matrix(1.0300792,0,0,1.0300792,94.564824,-100.46655)"
-         id="g4224">
+         id="g3795"
+         transform="matrix(1.0913128,0,0,1.0913128,241.02545,-193.77749)">
         <path
-           sodipodi:nodetypes="cccc"
-           inkscape:connector-curvature="0"
-           id="path4210"
-           d="m -2928.6729,2563.1336 548.7743,0 -274.3872,-454.7093 z"
-           style="fill:#000000;fill-opacity:1;stroke:none" />
-        <path
-           style="fill:url(#linearGradient4228);fill-opacity:1;stroke:none"
-           d="m -2905.7143,2541.0907 502.8571,0 -251.4286,-435.2491 z"
+           style="fill:#fad026;fill-opacity:1;stroke:none"
+           d="m -2898.551,2517.0581 517.9826,0 -258.9914,-448.341 z"
            id="path4192"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="cccc" />
-      </g>
-      <text
-         sodipodi:linespacing="125%"
-         id="text4230"
-         y="2475.3743"
-         x="-2687.6555"
-         style="font-size:341.10897827000002000px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Adobe Gothic Std B;-inkscape-font-specification:Adobe Gothic Std B Bold"
-         xml:space="preserve"><tspan
-           y="2475.3743"
+        <text
+           xml:space="preserve"
+           style="font-size:341.10897827px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Adobe Gothic Std B;-inkscape-font-specification:Adobe Gothic Std B Bold"
            x="-2687.6555"
-           id="tspan4232"
-           sodipodi:role="line">!</tspan></text>
+           y="2475.3743"
+           id="text4230"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4232"
+             x="-2687.6555"
+             y="2475.3743">!</tspan></text>
+      </g>
     </g>
   </g>
 </svg>

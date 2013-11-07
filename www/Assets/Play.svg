@@ -13,7 +13,7 @@
    height="100"
    id="svg3399"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="Play.svg">
   <defs
      id="defs3401" />
@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-212.68131"
-     inkscape:cy="2.6256314"
+     inkscape:cx="-207.88309"
+     inkscape:cy="6.9187797"
      inkscape:document-units="px"
      inkscape:current-layer="g3946"
      showgrid="false"
@@ -43,7 +43,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,7 +64,7 @@
          inkscape:connector-curvature="0"
          id="rect5087"
          d="m -179.88135,-758.59132 -3.34183,495.45001 215.155075,-6.68366 -0.0413,-488.76635 z m 55.24693,63.24456 26.657472,0 0,85.24625 -26.657472,0 z m 74.616201,0 26.616269,0 0,85.24625 -26.616269,0 z m 91.843014,117.87796 -3.34183,314.32749 145.895085,-3.34183 0,-310.98566 z m -166.459215,27.81112 26.657472,0 0,85.24625 -26.657472,0 z m 74.616201,0 26.616269,0 0,85.24625 -26.616269,0 z m 146.471924,27.81111 26.657475,0 0,85.20506 -26.657475,0 z m -221.088125,117.83677 26.657472,0 0,85.24626 -26.657472,0 z m 74.616201,0 26.616269,0 0,85.24626 -26.616269,0 z m 146.471924,0 26.657475,0 0,85.24626 -26.657475,0 z"
-         style="fill:#006878;fill-opacity:1;stroke:none" />
+         style="fill:#3c6878;fill-opacity:1;stroke:none" />
     </g>
   </g>
 </svg>

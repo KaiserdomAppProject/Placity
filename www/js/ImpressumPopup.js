@@ -11,7 +11,7 @@ var ImpressumPopup = function(data) {
         if (self.myscroll) {
             setTimeout(function(){self.myscroll.refresh();}, 0);
         } else {
-            setTimeout(function(){self.myscroll = new IScroll($('.popup-content', self.el)[0]);}, 0);
+            setTimeout(function(){self.myscroll = new IScroll($('.popup-content', self.el)[0]);}, 500);
         }  
     };
     

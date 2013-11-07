@@ -47,7 +47,7 @@ var ScanView = function() {
                 );
             });
         } else {
-            this.el.on("click", "#game_request", function(){if (app.network != "none") {app.openPopup("#download", {id:11});
+            this.el.on("click", "#game_request", function(){if (app.network != "none") {var inp = prompt("Manuell ID eingeben:", 132); if (inp != null) app.openPopup("#download", {id:inp});
                                                                                        } else {
                                                                                             app.showAlert("Keine Internetverbindung verfügbar!", "FEHLER");   
                                                                                        }

@@ -11,6 +11,7 @@ var IngameView = function(id) {
         app.dataInterface.getGame(self.gameid, function(error, game) {
                         if (error == 0) {
                             self.currentGame = game;
+                            $(".HEADLINE").html(game.name);
                         } else {
                             app.showAlert("Game not found", "INGAME ERROR");     
                         }
@@ -115,8 +116,7 @@ var IngameView = function(id) {
                                 case "7.0":
                                     var input = contents[i];
                                     app.dataInterface.getAnswers(self.gameid, self.state, contents[i].content_id, function(answers) {
-                                        input["answers"] = answers;
-                                        input["input_type"] = (/^\d+$/.test(answers[0].txt)) ? "number" : "text";
+                                        input["answer"] = answers[0].txt;
                                         $(IngameView.cinputtemplate(input)).hide().appendTo(".content").fadeIn(dur);
                                         self.setScroll();
                                         //setTimeout(function(){$('.txt_input').autotab_magic().autotab_filter('numeric');},0);
@@ -200,8 +200,8 @@ var IngameView = function(id) {
                     case "7.0":
                         var input = "";
                         $(".txt_input").each(function(index){input += $(this).val();});
-                        if (input.toLowerCase() == this.currentContents[i].answers[0].txt.toLowerCase()) {
-                            this.points += parseInt(this.currentContents[i].answers[0].points);  
+                        if (input.toLowerCase() == this.currentContents[i].answer.toLowerCase()) {
+                            this.points += parseInt(this.currentContents[i].answer.points);  
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
                         } else if (input != ""){
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, "Falsch!");   
@@ -235,23 +235,28 @@ var IngameView = function(id) {
     
     this.scanCode = function() {
         var self = this;
-        var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-            scanner.scan(
-                function (result) {
-                     if (result.text.lastIndexOf("?") != -1 && result.text.indexOf("www.kaiserdom-app.de/qrcodes") != -1) {
-                        if (result.text.slice(result.text.lastIndexOf("?")+1).replace(/^\s+|\s+$/g, "") == self.currentContents[0].txt.replace(/^\s+|\s+$/g, "")) {
-                            self.nextScreen();   
+        if (navigator.notification) {
+            var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+                scanner.scan(
+                    function (result) {
+                         if (result.text.lastIndexOf("?") != -1 && result.text.indexOf("www.kaiserdom-app.de/qrcodes") != -1) {
+                            if (result.text.slice(result.text.lastIndexOf("?")+1).replace(/^\s+|\s+$/g, "") == self.currentContents[0].txt.replace(/^\s+|\s+$/g, "")) {
+                                self.nextScreen();   
+                            } else {
+                                app.showAlert("Das war leider nicht der richtige Code!", "FEHLER");   
+                            }
                         } else {
-                            app.showAlert("Das war leider nicht der richtige Code!", "FEHLER");   
+                            app.showAlert("Kein Placity-Code!","ERROR");       
                         }
-                    } else {
-                        app.showAlert("Kein Placity-Code!","ERROR");       
+                    }, 
+                    function (error) {
+                        app.showAlert("Scanning failed: " + error, "ERROR");
                     }
-                }, 
-                function (error) {
-                    app.showAlert("Scanning failed: " + error, "ERROR");
-                }
-            );
+                );
+        } else {
+            var inp = prompt("Code eingeben:", ""); 
+            if (inp == self.currentContents[0].txt.replace(/^\s+|\s+$/g, "")) self.nextScreen();
+        };
     };
     
     this.onLeave = function() {
@@ -270,6 +275,8 @@ var IngameView = function(id) {
             $(".SCROLL_FRAME").animate({left: "0px"}, dur);
             
             $(".BOTTOM_BAR").animate({left: "0px"}, dur);
+            $("#menu").removeClass("rotateb");
+            $("#menu").html("Menü");
         } else {
             $("#progress").html(((this.state+1) <= this.currentGame.length)?"<span>Fortschritt:</span><br>" + (this.state+1) + "/" + this.currentGame.length:"<span>Fortschritt:</span><br>Ende");
             $(".SIDEBAR").addClass("on");
@@ -280,6 +287,8 @@ var IngameView = function(id) {
             $(".SCROLL_FRAME").animate({left: "120px"}, dur);
 
             $(".BOTTOM_BAR").animate({left: "120px"}, dur);
+            $("#menu").addClass("rotateb");
+            $("#menu").html("Spiel");
         }
     };
     
@@ -289,17 +298,16 @@ var IngameView = function(id) {
         this.el.on("click", "#menu", function(){self.toggleMenu();});
         
         this.el.on("click", "#end", function(){self.state = 0; self.points = 0;window.location.hash = "#"});
-        this.el.on("click", "#impressum", function(){app.openPopup("#impressum", {txt:self.currentGame.impressum})});
+        this.el.on("click", "#impressum", function(){var impressum = self.currentGame.impressum.slice(self.currentGame.impressum.lastIndexOf("Multimediamat")); var iname = self.currentGame.impressum.slice(0,self.currentGame.impressum.lastIndexOf("Multimediamat")); app.openPopup("#impressum", {txt:impressum,name:iname})});
         
         this.el.on("click", "#nextScreen", $.proxy(function(){this.calculatePoints(); this.nextScreen();}, this));
         this.el.on("click", "#lastScreen", $.proxy(function(){this.lastScreen();}, this));
         this.el.on("click", "#help", $.proxy(function(){app.showAlert(this.currentScreen.helptxt, "TIPP");}, this));
         this.el.on("click", ".qr_scan", $.proxy(function(){this.scanCode();}, this));
-        this.el.on("click", "#mobV", $.proxy(function(){app.dataInterface.setValue("mobileVideo", "true", function() {this.renderContents();});}, this));
-        this.el.on("click", ".txt_input", function(e) {e.target.focus(); e.target.select()});
+        this.el.on("click", "#mobV", $.proxy(function(){app.dataInterface.setValue("mobileVideo", "true", $.proxy(function() {this.renderContents();}, this));}, this));
+        this.el.on("click", ".txt_input", function(e) {e.target.focus(); e.target.select();});
         this.el.on("input", ".txt_input", function(e) {$(e.target).next("input").focus().select();});
         this.el.on("keyup", ".txt_input", function(e) {if(e.keyCode == 8) $(e.target).prev("input").focus().select();});
-        
     };
     
     this.initialize(id);

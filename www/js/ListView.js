@@ -28,13 +28,18 @@ var ListView = function() {
                 $("#gamelist").append(ListView.litemplate(games[i]));   
             }
             
-            if (games.length == 0) $(".SCROLL_FRAME").html("<p class='list-nogame'><h1>Keine Spiele heruntergeladen!</h1></p>");
+            if (games.length == 0) $(".SCROLL_FRAME").html("<p class='list-nogame'><h1>Keine Spiele heruntergeladen!</h1><!--<br><button class='button rect' id='demo'>Demo Spiel</button></p>-->");
             self.setScroll();
         }); 
     };
     
     this.registerEvents = function() {
         this.el.on("click", "#scan-btn", function(){window.location.hash = "#scan"});
+        this.el.on("click", "#demo", function(){if (app.network != "none") {app.openPopup("#download", {id:132});
+                                                                                       } else {
+                                                                                            app.showAlert("Keine Internetverbindung verfügbar!", "FEHLER");   
+                                                                                       }
+                                                           });
     };
     
     this.initialize();

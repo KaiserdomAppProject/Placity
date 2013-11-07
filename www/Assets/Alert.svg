@@ -11,11 +11,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="20"
-   height="20.299999"
+   height="20"
    id="svg3499"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="Delete.svg">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Alert.svg">
   <defs
      id="defs3501">
     <linearGradient
@@ -42,15 +42,6 @@
          offset="1"
          id="stop4346" />
     </linearGradient>
-    <filter
-       color-interpolation-filters="sRGB"
-       inkscape:collect="always"
-       id="filter4431">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.444375"
-         id="feGaussianBlur4433" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient4342-1"
@@ -201,6 +192,16 @@
          offset="1"
          style="stop-color:#fa2319;stop-opacity:1;" />
     </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4202-2"
+       id="linearGradient3798"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,8.7284337)"
+       x1="-2905.7144"
+       y1="2314.7378"
+       x2="-2402.8572"
+       y2="2314.7378" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -209,9 +210,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="13.649555"
-     inkscape:cy="-7.9930051"
+     inkscape:zoom="22.4"
+     inkscape:cx="13.302018"
+     inkscape:cy="3.9770953"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -228,7 +229,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -236,35 +237,25 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1032.0622)">
+     transform="translate(0,-1032.3622)">
     <g
-       transform="matrix(0.03538063,0,0,0.03538063,103.38929,960.68672)"
-       id="g4234">
-      <g
-         transform="matrix(1.0300792,0,0,1.0300792,94.564824,-100.46655)"
-         id="g4224">
-        <path
-           sodipodi:nodetypes="cccc"
-           inkscape:connector-curvature="0"
-           id="path4210"
-           d="m -2928.6729,2563.1336 548.7743,0 -274.3872,-454.7093 z"
-           style="fill:#000000;fill-opacity:1;stroke:none" />
-        <path
-           style="fill:url(#linearGradient4228);fill-opacity:1;stroke:none"
-           d="m -2905.7143,2541.0907 502.8571,0 -251.4286,-435.2491 z"
-           id="path4192"
-           inkscape:connector-curvature="0"
-           sodipodi:nodetypes="cccc" />
-      </g>
+       id="g3804"
+       transform="matrix(1.0913128,0,0,1.0913128,-0.91313247,-94.578934)">
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path4192"
+         d="m 0.83672819,1049.7418 18.32655181,0 -9.163278,-15.8626 z"
+         style="fill:#fa2319;fill-opacity:1;stroke:none" />
       <text
          sodipodi:linespacing="125%"
          id="text4230"
-         y="2475.3743"
-         x="-2687.6555"
-         style="font-size:341.10897827px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Adobe Gothic Std B;-inkscape-font-specification:Adobe Gothic Std B Bold"
+         y="1048.267"
+         x="8.2983446"
+         style="font-size:12.06865025px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Adobe Gothic Std B;-inkscape-font-specification:Adobe Gothic Std B Bold"
          xml:space="preserve"><tspan
-           y="2475.3743"
-           x="-2687.6555"
+           y="1048.267"
+           x="8.2983446"
            id="tspan4232"
            sodipodi:role="line">!</tspan></text>
     </g>

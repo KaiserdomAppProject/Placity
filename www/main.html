@@ -29,9 +29,8 @@
         <script id="info-tpl" type="text/x-handlebars-template">
             <header class="TOP_BAR"><button type="button" class="help" id="help_info"></button></header>
             <div class="FEATURE_BAR"></div>
-            <header class="NAV_BAR"><button type="button" class="button left link" id="start">Start</button></header>
+            <header class="NAV_BAR"><span class="HEADLINE">Info</span><button type="button" class="button left link" id="start">Start</button></header>
             <div class="SCROLL_FRAME start_bg full">
-                <div id="floater_settings"></div>
                 <section id="infoframe">
                     <section id="about">
                         Placity ist ein Produkt des
@@ -42,7 +41,6 @@
                         Fabian Kögel<br>
                         Johannes Schantz<br>
                         Leonard Nürnberg<br><br>
-                        © 2013 Kaiserdom APP Project
                     </section>
                 </section>
             </div>
@@ -51,7 +49,7 @@
         <script id="settings-tpl" type="text/x-handlebars-template">
             <header class="TOP_BAR"><button type="button" class="help" id="help_settings"></button></header>
             <div class="FEATURE_BAR"></div>
-            <header class="NAV_BAR"><button type="button" class="button left link" id="start">Start</button></header>
+            <header class="NAV_BAR"><span class="HEADLINE">Optionen</span><button type="button" class="button left link" id="start">Start</button></header>
             <div class="SCROLL_FRAME start_bg full">
                 <div id="floater_settings"></div>
                 <section id="settingsframe">
@@ -62,7 +60,7 @@
                     <label>Mobile Videos einschalten</label><input type="checkbox" class="settings_checkbox" id="mobileVideo" />-->
                         <div class="settings_container">
                             <h1>Netzwerk:</h1>
-                            <label class="settings_label">Mobile Video:</label><input type="checkbox" class="settings_checkbox" id="mobileVideo" />
+                            <input type="checkbox" class="settings_checkbox" id="mobileVideo" /><label class="settings_label" for="mobileVideo">Mobile Video:</label>
                             <div class="clearfix"></div> 
                         </div>
                         <div class="settings_container">
@@ -84,9 +82,8 @@
         </script>
         
         <script id="scan-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-             <header class="NAV_BAR">
-                 <button type="button" class="button right link" id="list">Gameliste</button>
+             <header class="NAV_BAR"><span class="HEADLINE">Scan</span>
+                 <button type="button" class="button right link" id="list">Liste</button>
                  <button type="button" class="button left link" id="start">Start</button>
             </header>
             <div class="SCROLL_FRAME full">
@@ -97,8 +94,7 @@
         </script>
         
         <script id="radar-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-            <header class="NAV_BAR"><a class="button right" href="#scan">Scan</a></header>
+            <header class="NAV_BAR"><span class="HEADLINE">Radar</span><a class="button right" href="#scan">Scan</a></header>
             <div class="SCROLL_FRAME">
             <div class="content">
                 <div id="map_canvas"></div>
@@ -107,8 +103,7 @@
         </script>
         
         <script id="map-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-            <header class="NAV_BAR"><button type="button" class="button left link" id="ingame">Ingame</button></header>
+            <header class="NAV_BAR"><span class="HEADLINE">Map</span><button type="button" class="button left link" id="ingame">Ingame</button></header>
             <div class="SCROLL_FRAME">
             <div class="content">
                 
@@ -117,8 +112,7 @@
         </script>
         
         <script id="list-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-            <header class="NAV_BAR"><button type="button" class="button left link" id="scan-btn">Scan</button></header>
+            <header class="NAV_BAR"><span class="HEADLINE">Liste</span><button type="button" class="button left link" id="scan-btn">Scan</button></header>
             <div class="SCROLL_FRAME full">
                 <ul id="gamelist">
                 </ul>
@@ -162,7 +156,7 @@
             <div class="popup-content">
                 <div id="popup-wrap">
                     <h1>Impressum</h1>
-                    <div><center>{{breaklines txt}}</center></div>
+                    <div><center>Dieses Spiel wurde im Rahmen des Wettbewerbs „Spielend durch die Region! Zeigt uns Eure Heimat als App.“ entwickelt.  Der Wettbewerb ist Teil des Projekts „Die Metropolregion Rhein-Neckar – Stadt, Land, Heimat“ der gemeinschaftlichen Regionalentwicklung auf Initiative des Verbands Region Rhein-Neckar in Kooperation mit der Metropolregion Rhein-Neckar GmbH.<br><br>{{name}} steht unter einer Creative Commons Namensnennung ‐ Nicht ‐ kommerziell 3.0 Unported Lizenz.<br><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.de"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a><br><br>{{breaklines txt}}</center></div>
                 </div>
             </div>
         </script>
@@ -186,23 +180,10 @@
                     </section>
                 </div>
             </div>
-        </script>
-        
-        <script id="menu-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-            <div id="menu_close" class="SCROLL_FRAME"></div>
-            <div id="menuarea">
-                <ul>
-                    <li id="menuStart" class="menuitem" onclick="window.location.hash='#'">Start</li>
-                    <li id="menuSettings" class="menuitem" onclick="window.location.hash='#settings'">Settings</li>
-                    <li id="progress" class="menuitem"></li>
-                </ul>
-            </div>
-        </script>        
+        </script>       
         
         <script id="ingame-tpl" type="text/x-handlebars-template">
-            <header class="TOP_BAR"></header>
-            <header class="NAV_BAR">
+            <header class="NAV_BAR"><span class="HEADLINE"></span>
                 <!--<button type="button" class="button right link" id="map">Map</button>-->
                 <button type="button" class="button left link" id="menu">Menü</button>
             </header>
@@ -220,9 +201,10 @@
                 <button type="button" class="button right link" id="nextScreen">Weiter</button>
             </footer>
             <section id="menuarea" class="SIDEBAR off">
+                <header>Menü</header>
                 <ul>
                     <li id="menuStart" class="menuitem" onclick="window.location.hash='#'">Start</li>
-                    <li id="menuSettings" class="menuitem" onclick="window.location.hash='#settings'">Optionen</li>
+                    <li id="menuSettings" class="menuitem" onclick="app.history.push('');window.location.hash='#settings'">Optionen</li>
                     <li id="progress" class="menuitem"><span>Fortschritt:</span><br>1/20</li>
                 </ul>
             </section>
@@ -248,25 +230,38 @@
             <div class="contents content_dialog" id="{{content_id}}">
                 <img class="avatar" src="{{src}}" style="float: {{orientation}};"/>
                 <p class="dialogtxt" style="float: {{orientation}};">{{txt}}</p>
+                <div class="clearfix"></div> 
             </div>
         </script>
         
         <script id="content-img-tpl" type="text/x-handlebars-template">
             <div class="contents content_img" id="{{content_id}}">
-                <img class="image" src="{{src}}"/>
+                <div class="img_wrapper">
+                    <div class="img_container">
+                        <img class="image" src="{{src}}"/>
+                    </div>
+                </div>
                 {{txt}}
             </div>
         </script>
         
         <script id="content-sound-tpl" type="text/x-handlebars-template">
             <div class="contents content_sound" id="{{content_id}}">
-                <audio class="audio" src="{{src}}" type="mp3"/>
+                <audio class="audio" controls>
+                    <source src="{{src}}" type="audio/mpeg">
+                    <source src="{{src}}" type="audio/ogg">  
+                    <source src="{{src}}" type="audio/wav"> 
+                </audio>
             </div>
         </script>
         
         <script id="content-video-tpl" type="text/x-handlebars-template">
             <div class="contents content_video" id="{{content_id}}">
-                <video class="video" src="{{src}}" type="ogg/mp4" controls />
+                <video class="video" controls >
+                    <source src="{{src}}" type="video/mp4"> 
+                    <source src="{{src}}" type="video/webm"> 
+                    <source src="{{src}}" type="video/ogg"> 
+                </video>
                 {{txt}}   
             </div>
         </script>
@@ -279,7 +274,7 @@
         
         <script id="content-mobilevideo-tpl" type="text/x-handlebars-template">
             <div class="contents content_novideo" id="{{content_id}}">
-                <div class="novideo"><img src="Assets/Offline.svg" id="video-offline"/><br>Videos können aufgrund der hohen Datenmenge die mobile Datenverbindung stark belasten!<br><button type="button" class="button rect" id="mobV">Mobile Video freischalten</button><h6>Kann unter Optionen - Mobile Video rückgängig gemacht werden</h6></div>
+                <div class="novideo"><img src="Assets/Offline.svg" id="video-offline"/><br>Videos können aufgrund der hohen Datenmenge die mobile Datenverbindung stark belasten!<br><button type="button" class="button rect" id="mobV">Mobile Video aktivieren</button><h6>Kann unter Optionen - Mobile Video rückgängig gemacht werden</h6></div>
             </div>
         </script>
         
@@ -289,7 +284,7 @@
                 <ul class="answer_list">
                     {{#each answers}}
                         <li class="answer">
-                            <input type="checkbox" id="mt{{@index}}" name="mtaw" value="{{value}}"/>
+                            <input class="checkbox" type="checkbox" id="mt{{@index}}" name="mtaw" value="{{value}}"/>
                             <label for="mt{{@index}}">{{txt}}</label>
                         </li>
                     {{/each}}
@@ -314,9 +309,11 @@
         <script id="content-input-tpl" type="text/x-handlebars-template">
             <div class="contents content_input" id="{{content_id}}">
                 <p class="question_txt">{{question}}</p>
-                {{#each answers.[0].txt}}
-                    <input type="{{../input_type}}" class="txt_input" maxlength="1"/>
-                {{/each}}
+                <div id="input_wrap">
+                    {{#each answer}}
+                        <input type="{{typeof ../answer}}" class="txt_input" maxlength="1" min="0" max="9"/>
+                    {{/each}}
+                </div>
             </div>
         </script>
         
@@ -339,7 +336,11 @@
         <script id="content-start-tpl" type="text/x-handlebars-template">
             <div class="contents content_start">
                 <h1>{{name}}</h1>
-                <center><img class="image" src="{{image}}" /></center>
+                <div class="img_wrapper">
+                    <div class="img_container">
+                        <img class="image" src="{{image}}"/>
+                    </div>
+                </div>
                 <p>{{description}}</p>
             </div>
         </script>

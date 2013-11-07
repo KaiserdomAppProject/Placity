@@ -21,6 +21,10 @@ var app = {
             return new Handlebars.SafeString(text);
            });
         
+        Handlebars.registerHelper('typeof', function(input) {
+            return (/^\d+$/.test(input)) ? "number" : "text";
+           });
+
     },
     
     showAlert: function (message, title) {
@@ -201,6 +205,9 @@ var app = {
         
 };
 
-//document.addEventListener("deviceready", function() {window.location.hash = "#";app.initialize();}, false);
-window.location.hash = "#";
-app.initialize();
+if (window.isPhoneGap) {
+    document.addEventListener("deviceready", function() {window.location.hash = "#";app.initialize();}, false);
+} else {
+    window.location.hash = "#";
+    app.initialize();
+}
