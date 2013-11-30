@@ -41,12 +41,18 @@ var IngameView = function(id) {
         }  
     };
     
+    this.ScaleImage = function(srcWidth, srcHeight) {
+        var ratio = Math.min(this.img_maxWidth = 0.9*$(".SCROLL_FRAME").width() / srcWidth, this.img_maxHeight = 0.5*$(".SCROLL_FRAME").height() / srcHeight);
+        return { width:srcWidth*ratio, height:srcHeight*ratio };
+    };
+    
     this.renderContents = function() {
         var self = this;
         $(".content").html(" ");
         $("#points").text(this.points);
         app.dataInterface.getScreen(this.gameid, this.state, function(code, screen) {
             self.currentScreen = screen;
+            var qcount = 0;
             $("#nextScreen").removeClass("disabled");//Reset nextScreen Button after qr-scans
             if (screen.back == "false") {
                 $("#lastScreen").addClass("disabled");  
@@ -75,6 +81,9 @@ var IngameView = function(id) {
                         
                                 case "2.0":
                                     $(IngameView.cimgtemplate(contents[i])).hide().appendTo(".content").fadeIn(dur);
+                                    var aspectRatio = self.ScaleImage($(".content_img img:last-of-type").width(), $(".content_img img:last-of-type").height());
+                                    $(".content_img img:last-of-type").css("width", aspectRatio.width); 
+                                    $(".content_img img:last-of-type").css("height", aspectRatio.height); 
                                     break;
                         
                                 case "3.0":
@@ -102,6 +111,7 @@ var IngameView = function(id) {
                                         $(IngameView.csgchtemplate(input)).hide().appendTo(".content").fadeIn(dur);
                                         self.setScroll();
                                     });
+                                    qcount += 1;
                                     break;
                         
                                 case "6.0":
@@ -111,6 +121,7 @@ var IngameView = function(id) {
                                         $(IngameView.cmtchtemplate(input)).hide().appendTo(".content").fadeIn(dur);
                                         self.setScroll();
                                     });
+                                    qcount += 1;
                                     break;
                         
                                 case "7.0":
@@ -121,13 +132,17 @@ var IngameView = function(id) {
                                         self.setScroll();
                                         //setTimeout(function(){$('.txt_input').autotab_magic().autotab_filter('numeric');},0);
                                     });
+                                    qcount += 1;
                                     break;
                         
                                 case "8.0":
                                     $("#nextScreen").addClass("disabled");
                                     $(IngameView.cqrtemplate(contents[i])).hide().appendTo(".content").fadeIn(dur);
                                     break;
-                            }  
+                            }
+                            if (qcount > 1) {
+                                app.showAlert("Mehr als eine Frage im Screen! Bitte im QE anpassen.", "QuestionEditor Fehler");  
+                            };
             
                         }
                     self.setScroll();
@@ -144,6 +159,9 @@ var IngameView = function(id) {
                         if (error == 0) {
                             self.currentGame = game;
                             $(".content").append(IngameView.cstarttemplate(game));
+                            var aspectRatio = self.ScaleImage($(".content_start img:last-of-type").width(), $(".content_start img:last-of-type").height());
+                            $(".content_start img:last-of-type").css("width", aspectRatio.width); 
+                            $(".content_start img:last-of-type").css("height", aspectRatio.height); 
                         } else {
                             app.showAlert("Game not found", "INGAME ERROR");     
                         }

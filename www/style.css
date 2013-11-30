@@ -1010,6 +1010,7 @@ li {
     right: 0;
 }*/
 
+/*
 .img_wrapper {
     width: 90%;
     margin-left: 5%;
@@ -1026,15 +1027,17 @@ li {
     overflow: hidden;
     text-align: center;
 }
+*/
 
 .content_img {
     position: relative;
+    text-align: center;
 }
 
+
 .image {
-    max-height: 100%;
-    max-width: 100%;
     display: inline-block;
+    text-align: center;
 }
 
 /*.content_img:after {

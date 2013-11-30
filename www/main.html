@@ -236,12 +236,13 @@
         
         <script id="content-img-tpl" type="text/x-handlebars-template">
             <div class="contents content_img" id="{{content_id}}">
-                <div class="img_wrapper">
+                <!--<div class="img_wrapper">
                     <div class="img_container">
                         <img class="image" src="{{src}}"/>
                     </div>
-                </div>
-                {{txt}}
+                </div>-->
+                <img class="image" src="{{src}}"/>
+                <p>{{txt}}</p>
             </div>
         </script>
         
@@ -336,11 +337,12 @@
         <script id="content-start-tpl" type="text/x-handlebars-template">
             <div class="contents content_start">
                 <h1>{{name}}</h1>
-                <div class="img_wrapper">
+                <!--<div class="img_wrapper">
                     <div class="img_container">
                         <img class="image" src="{{image}}"/>
                     </div>
-                </div>
+                </div>-->
+                <img class="image" src="{{image}}"/>
                 <p>{{description}}</p>
             </div>
         </script>
