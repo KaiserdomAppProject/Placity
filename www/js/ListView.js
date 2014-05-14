@@ -28,7 +28,7 @@ var ListView = function() {
                 $("#gamelist").append(ListView.litemplate(games[i]));   
             }
             
-            if (games.length == 0) $(".SCROLL_FRAME").html("<p class='list-nogame'><h1>Keine Spiele heruntergeladen!</h1><!--<br><button class='button rect' id='demo'>Demo Spiel</button></p>-->");
+            if (games.length == 0) $(".SCROLL_FRAME").html("<p class='list-nogame'><h1>Keine Spiele heruntergeladen!</h1><br><button class='button rect' id='demo'>Demo Spiel</button></p>");
             self.setScroll();
         }); 
     };

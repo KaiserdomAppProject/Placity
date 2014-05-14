@@ -37,12 +37,17 @@ var IngameView = function(id) {
         if (self.myscroll) {
             setTimeout(function(){self.myscroll.refresh();}, 500);
         } else {
-            setTimeout(function(){self.myscroll = new IScroll($('.SCROLL_FRAME', self.el)[0]);}, 500);
+            setTimeout(function(){self.myscroll = new IScroll($('.SCROLL_FRAME', self.el)[0], {
+                useTransform: true,
+                zoom: false,
+                onBeforeScrollStart: null
+            });}, 500);
         }  
     };
     
     this.ScaleImage = function(srcWidth, srcHeight) {
-        var ratio = Math.min(this.img_maxWidth = 0.9*$(".SCROLL_FRAME").width() / srcWidth, this.img_maxHeight = 0.5*$(".SCROLL_FRAME").height() / srcHeight);
+        var ratio = Math.min(0.9*$(window).width() / srcWidth, 0.5*$(window).height() / srcHeight);
+        alert(srcWidth+" | "+srcHeight+" | "+$(window).width()+" | "+$(window).height());
         return { width:srcWidth*ratio, height:srcHeight*ratio };
     };
     
@@ -80,10 +85,12 @@ var IngameView = function(id) {
                                     break;
                         
                                 case "2.0":
-                                    $(IngameView.cimgtemplate(contents[i])).hide().appendTo(".content").fadeIn(dur);
-                                    var aspectRatio = self.ScaleImage($(".content_img img:last-of-type").width(), $(".content_img img:last-of-type").height());
+                                    $(IngameView.cimgtemplate(contents[i])).appendTo(".content").hide().fadeIn(dur);
+                                    /*var image = $(IngameView.cimgtemplate(contents[i])).appendTo(".content").show().hide(); //-> Force Redraw with show().hide()
+                                    var aspectRatio = self.ScaleImage(image.width(), image.height());
                                     $(".content_img img:last-of-type").css("width", aspectRatio.width); 
-                                    $(".content_img img:last-of-type").css("height", aspectRatio.height); 
+                                    $(".content_img img:last-of-type").css("height", aspectRatio.height);
+                                    image.fadeIn(dur);*/
                                     break;
                         
                                 case "3.0":
@@ -127,7 +134,8 @@ var IngameView = function(id) {
                                 case "7.0":
                                     var input = contents[i];
                                     app.dataInterface.getAnswers(self.gameid, self.state, contents[i].content_id, function(answers) {
-                                        input["answer"] = answers[0].txt;
+                                        input["answer"] = answers[0];
+                                        input["answerl"] = answers[0].txt.length;
                                         $(IngameView.cinputtemplate(input)).hide().appendTo(".content").fadeIn(dur);
                                         self.setScroll();
                                         //setTimeout(function(){$('.txt_input').autotab_magic().autotab_filter('numeric');},0);
@@ -159,9 +167,9 @@ var IngameView = function(id) {
                         if (error == 0) {
                             self.currentGame = game;
                             $(".content").append(IngameView.cstarttemplate(game));
-                            var aspectRatio = self.ScaleImage($(".content_start img:last-of-type").width(), $(".content_start img:last-of-type").height());
+                            /*var aspectRatio = self.ScaleImage($(".content_start img:last-of-type").width(), $(".content_start img:last-of-type").height());
                             $(".content_start img:last-of-type").css("width", aspectRatio.width); 
-                            $(".content_start img:last-of-type").css("height", aspectRatio.height); 
+                            $(".content_start img:last-of-type").css("height", aspectRatio.height);*/
                         } else {
                             app.showAlert("Game not found", "INGAME ERROR");     
                         }
@@ -170,6 +178,7 @@ var IngameView = function(id) {
                 
                 case 2:
                     var input = {points:self.points, name:app.dataInterface.getSyncValue("userName")};
+                    $("#help").hide();
                     $(".content").append(IngameView.cendtemplate(input));
                     $("#lastScreen, #nextScreen, #points").addClass("disabled");
                     $("#end").removeClass("disabled");
@@ -212,16 +221,22 @@ var IngameView = function(id) {
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, c+" Falsch!");
                         } else if (c > 0){
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, c+" Richtig!");   
-                        }
+                        } 
                         break;
                         
                     case "7.0":
-                        var input = "";
+                        /*var input = "";
                         $(".txt_input").each(function(index){input += $(this).val();});
                         if (input.toLowerCase() == this.currentContents[i].answer.toLowerCase()) {
                             this.points += parseInt(this.currentContents[i].answer.points);  
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
                         } else if (input != ""){
+                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, "Falsch!");   
+                        }*/
+                        if ($(".txt_input").val().toLowerCase() == this.currentContents[i].answer.txt.toLowerCase()) {
+                            this.points += parseInt(this.currentContents[i].answer.points);
+                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
+                        } else if ($(".txt_input").val() != ""){
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, "Falsch!");   
                         }
                         break;
@@ -324,8 +339,8 @@ var IngameView = function(id) {
         this.el.on("click", ".qr_scan", $.proxy(function(){this.scanCode();}, this));
         this.el.on("click", "#mobV", $.proxy(function(){app.dataInterface.setValue("mobileVideo", "true", $.proxy(function() {this.renderContents();}, this));}, this));
         this.el.on("click", ".txt_input", function(e) {e.target.focus(); e.target.select();});
-        this.el.on("input", ".txt_input", function(e) {$(e.target).next("input").focus().select();});
-        this.el.on("keyup", ".txt_input", function(e) {if(e.keyCode == 8) $(e.target).prev("input").focus().select();});
+        //this.el.on("input", ".txt_input", function(e) {$(e.target).next("input").focus().select();});
+        //this.el.on("keyup", ".txt_input", function(e) {if(e.keyCode == 8) {$(e.target).prev("input").focus().select();}else{$(e.target).next("input").focus().select();}});
     };
     
     this.initialize(id);

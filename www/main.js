@@ -24,7 +24,26 @@ var app = {
         Handlebars.registerHelper('typeof', function(input) {
             return (/^\d+$/.test(input)) ? "number" : "text";
            });
-
+        
+        Handlebars.registerHelper('insert_img', function(src, id) {
+            var tmp = new Image();
+            var win = ($(window).width()<640)?$(window):$(".SCROLL_FRAME");
+            tmp.onload = function(){
+                var ratio = Math.min(0.9*win.width() / tmp.width, 0.4*win.height() / tmp.height);
+                tmp.height = tmp.height*ratio;
+                tmp.width = tmp.width*ratio;
+                $("#"+id).find(".image_ph").append(tmp);
+            };
+            tmp.src=src;
+           });
+        
+        Handlebars.registerHelper('check', function(txt) {
+            if (txt.toLowerCase() == "text angeben") {
+                return new Handlebars.SafeString("");
+            } else {
+                return new Handlebars.SafeString(txt);
+            };
+           });
     },
     
     showAlert: function (message, title) {

@@ -16,20 +16,24 @@ var DownloadPopup = function(data) {
                     $("#play").fadeIn();
                     $("#update").fadeIn();
                     $(".DOWNLOAD_img").css("background-image", "url("+data.image+")");
-                    $(".DOWNLOAD_img").css("background-size", "60px");
+                    $(".DOWNLOAD_img").css("background-size", "cover");
                     $(".DOWNLOAD_name").html(data.name).fadeIn();
                     $(".DOWNLOAD_desc").html(data.description).fadeIn();
                     $("#location").html(data.plz).fadeIn();
                 });
             } else {  
                 app.dataInterface.downloadGameInfo(self.data.id, function(data) {
-                    $("#download").fadeIn();
-                    $(".DOWNLOAD_img").css("background-image", "url("+data.image+")");
-                    $(".DOWNLOAD_img").css("background-size", "60px");
-                    $(".DOWNLOAD_name").html(data.name).fadeIn();
-                    $(".DOWNLOAD_desc").html(data.describtion).fadeIn();
-                    $("#location").html(data.plz).fadeIn();
-                    if (data.size != 0) $("#filesize").html(Math.round(data.size/10000)/100+" MB").fadeIn();
+                    if (data.name != "") {
+                        $("#download").fadeIn();
+                        $(".DOWNLOAD_img").css("background-image", "url("+data.image+")");
+                        $(".DOWNLOAD_img").css("background-size", "cover");
+                        $(".DOWNLOAD_name").html(data.name).fadeIn();
+                        $(".DOWNLOAD_desc").html(data.describtion).fadeIn();
+                        $("#location").html(data.plz).fadeIn();
+                        if (data.size != 0) $("#filesize").html(Math.round(data.size/10000)/100+" MB").fadeIn();
+                    } else {
+                           
+                    }
                     self.setScroll();
                 }); 
             }

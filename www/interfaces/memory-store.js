@@ -1,56 +1,56 @@
-var MemoryStore = function(successCallback, errorCallback) {
+var MemoryStore = function (successCallback, errorCallback) {
     
-    this.initialize = function() {
+    this.initialize = function () {
         this.initializeValueStore();
         this.db = window.openDatabase("data", "1.0", "Games DB", 5242880);
         this.createTables(successCallback);
     };
     
-    this.firstStart = function() {
+    this.firstStart = function () {
         return (localStorage.getItem("userName") === null) ? true : false;
     };
     
-    this.initializeValueStore = function() {
+    this.initializeValueStore = function () {
         if (localStorage.getItem("userName") === null) {
             this.setValue("userName", "Domgärtner");
             this.setValue("userAge", "25");
             this.setValue("mobileVideo", "true");
-        };
+        }
     };
     
-    this.clearValues = function(callback) {
+    this.clearValues = function (callback) {
         localStorage.clear();
         this.initializeValueStore();
         callLater(callback);
     };
       
-    this.setValue = function(key, value, callback) {
+    this.setValue = function (key, value, callback) {
         localStorage.setItem(key, value);
         callLater(callback);
     };
     
-    this.getSyncValue = function(key) {
+    this.getSyncValue = function (key) {
         return localStorage.getItem(key);       
     };
     
-    this.getValue = function(key, callback) {
+    this.getValue = function (key, callback) {
         var data = localStorage.getItem(key);       
         callLater(callback, data);
     };
     
-    this.readGamestate = function(id, callback) {
+    this.readGamestate = function (id, callback) {
         this.db.transaction(function(tx) {
             tx.executeSql("SELECT state, points FROM games WHERE id = " + id, this.txErrorHandler, function(tx, results) { return callback(results.rows.item(0).state, results.rows.item(0).points)});
         }, txErrorHandler);
     };
     
-    this.writeGamestate = function(id, state, points) {
-        this.db.transaction(function(tx) {
+    this.writeGamestate = function (id, state, points) {
+        this.db.transaction(function (tx) {
             tx.executeSql("UPDATE games SET state=?, points=? WHERE id=?", [state, points, id]);
         }, txErrorHandler);
     };
     
-    this.downloadGameInfo = function(id, callback) {
+    this.downloadGameInfo = function (id, callback) {
         var self = this;
         $.ajax({
             type: "GET",
@@ -58,20 +58,20 @@ var MemoryStore = function(successCallback, errorCallback) {
             data: {id:id, command: "info"},
             dataType: "jsonp",
             cache: false,
-            success: function(data, status) {
+            success: function (data, status) {
                 if (status == "timeout") {
                     app.showAlert("Server-Timeout abgelaufen");
                 } else {
                     callback(data);    
                 }
             },
-            error: function(jqXHR, textStatus, error) {
+            error: function (jqXHR, textStatus, error) {
                 app.showAlert(error, "AJAX ERROR INFO"+textStatus);
             }
         });
     };
     
-    this.downloadGame = function(id, callback) {
+    this.downloadGame = function (id, callback) {
         var self = this;
         $.ajax({
             type: "GET",
@@ -79,19 +79,19 @@ var MemoryStore = function(successCallback, errorCallback) {
             data: {id:id},
             dataType: "jsonp",
             cache: false,
-            success: function(data) {
+            success: function (data) {
                 //console.log(data);
                 self.updateTables(data, callback);      
             },
-            error: function(jqXHR, textStatus, error) {
+            error: function (jqXHR, textStatus, error) {
                 app.showAlert(error, "AJAX ERROR "+textStatus);
             }
         });
     };
     
-    this.updateTables = function(data, callback) {
+    this.updateTables = function (data, callback) {
           this.db.transaction(
-            function(tx) {   
+            function (tx) {   
                 
                 tx.executeSql("DELETE FROM screens WHERE game_id = "+data.id);
                 tx.executeSql("DELETE FROM contents WHERE game_id = "+data.id);

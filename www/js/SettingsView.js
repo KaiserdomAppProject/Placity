@@ -36,7 +36,17 @@ var SettingsView = function() {
         if (self.myscroll) {
             setTimeout(function(){self.myscroll.refresh();}, 0);
         } else {
-            setTimeout(function(){self.myscroll = new IScroll($('#settingsframe', self.el)[0]);}, 0);
+            setTimeout(function(){self.myscroll = new IScroll($('#settingsframe', self.el)[0], {
+                useTransform: true,
+                zoom: false,
+                onBeforeScrollStart: function (e) {
+                var target = e.target;
+                while (target.nodeType != 1) target = target.parentNode;
+                
+                if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                e.preventDefault();
+                }
+            });}, 0);
         }  
     };
     this.registerEvents = function() {

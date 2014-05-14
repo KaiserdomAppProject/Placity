@@ -34,7 +34,7 @@
                 <section id="infoframe">
                     <section id="about">
                         Placity ist ein Produkt des
-                        <img class="image" src="Assets/By.png"/><br>
+                        <img class="image width" src="Assets/By.png"/><br>
                         Team:<br>
                         Niels Münzenberger<br>
                         Benedikt Dassler<br>
@@ -78,7 +78,7 @@
         </script>
         
         <script id="settings-li-tpl" type="text/x-handlebars-template">
-            <li>{{name}}<button type="button" class="button drop" onclick="app.showDialog('Das Spiel wird gelöscht! Dieser Schritt ist irreversibel!', function(code){if (code != 1) {app.dataInterface.dropGame({{id}},function() {app.showAlert('Game gelöscht!', 'Fertig!')});app.currentPage.renderList();}}, 'Sicher?', ['Abbrechen', 'Löschen'])"></button></li>
+            <li>{{name}}<button type="button" class="button drop" onclick="app.showDialog('Das Spiel wird gelöscht! Dieser Schritt ist irreversibel!', function(code){if (code != 1) {app.dataInterface.dropGame({{id}},function() {app.currentPage.renderList()});}}, 'Sicher?', ['Abbrechen', 'Löschen'])"></button></li>
         </script>
         
         <script id="scan-tpl" type="text/x-handlebars-template">
@@ -211,7 +211,7 @@
         </script>
         
         <script id="list-li-tpl" type="text/x-handlebars-template">
-            <li><a class="listli" href="#ingame{{id}}"><img class="list-image" style="background-image: url({{image}})"/><div class="list-text"><h1>{{name}}</h1><span>{{description}}</span></div></a></li>
+            <li><a class="listli" href="#ingame{{id}}"><img class="list-image" style="background-image: url({{image}})"/><div class="list-text clearfix"><h1>{{name}}</h1><span>{{description}}</span></div></a></li>
         </script>
         
         <script id="content-txt-tpl" type="text/x-handlebars-template">
@@ -238,11 +238,13 @@
             <div class="contents content_img" id="{{content_id}}">
                 <!--<div class="img_wrapper">
                     <div class="img_container">
-                        <img class="image" src="{{src}}"/>
+                        <img class="image" src="{{image}}"/>
                     </div>
-                </div>-->
-                <img class="image" src="{{src}}"/>
-                <p>{{txt}}</p>
+                </div>
+                <img class="image" src="{{src}}"/>-->
+                <div class="image_ph"></div>
+                {{insert_img src content_id}}
+                <p>{{check txt}}</p>
             </div>
         </script>
         
@@ -263,7 +265,7 @@
                     <source src="{{src}}" type="video/webm"> 
                     <source src="{{src}}" type="video/ogg"> 
                 </video>
-                {{txt}}   
+                {{check txt}}   
             </div>
         </script>
         
@@ -311,9 +313,10 @@
             <div class="contents content_input" id="{{content_id}}">
                 <p class="question_txt">{{question}}</p>
                 <div id="input_wrap">
-                    {{#each answer}}
+                    <!--{{#each answer}}
                         <input type="{{typeof ../answer}}" class="txt_input" maxlength="1" min="0" max="9"/>
-                    {{/each}}
+                    {{/each}}-->
+                    <input type="{{typeof answer.txt}}" class="txt_input" maxlength="{{answerl}}" min="0" max="9" placeholder="{{answerl}} Zeichen"/>
                 </div>
             </div>
         </script>
@@ -335,14 +338,16 @@
         </script>
         
         <script id="content-start-tpl" type="text/x-handlebars-template">
-            <div class="contents content_start">
-                <h1>{{name}}</h1>
-                <!--<div class="img_wrapper">
+            <div class="contents content_start" id="-1">
+                <!--<h1>{{name}}</h1>
+                <div class="img_wrapper">
                     <div class="img_container">
                         <img class="image" src="{{image}}"/>
                     </div>
-                </div>-->
-                <img class="image" src="{{image}}"/>
+                </div>
+				<img class="image" src="{{image}}"/>-->
+                <div class="image_ph"></div>
+                {{insert_img image "-1"}}
                 <p>{{description}}</p>
             </div>
         </script>
