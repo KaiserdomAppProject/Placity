@@ -32,6 +32,19 @@ var IngameView = function(id) {
         return this;
     };
     
+    this.setScroll = function() {
+        var self = this;
+        if (self.myscroll) {
+            setTimeout(function(){self.myscroll.refresh();}, 500);
+        } else {
+            setTimeout(function(){self.myscroll = new IScroll($('.SCROLL_FRAME', self.el)[0], {
+                useTransform: true,
+                zoom: false,
+                onBeforeScrollStart: null
+            });}, 500);
+        }  
+    };
+    
     this.ScaleImage = function(srcWidth, srcHeight) {
         var ratio = Math.min(0.9*$(window).width() / srcWidth, 0.5*$(window).height() / srcHeight);
         alert(srcWidth+" | "+srcHeight+" | "+$(window).width()+" | "+$(window).height());
@@ -103,6 +116,7 @@ var IngameView = function(id) {
                                     app.dataInterface.getAnswers(self.gameid, self.state, contents[i].content_id, function(answers) {
                                         input["answers"] = answers;
                                         $(IngameView.csgchtemplate(input)).hide().appendTo(".content").fadeIn(dur);
+                                        self.setScroll();
                                     });
                                     qcount += 1;
                                     break;
@@ -112,6 +126,7 @@ var IngameView = function(id) {
                                     app.dataInterface.getAnswers(self.gameid, self.state, contents[i].content_id, function(answers) {
                                         input["answers"] = answers;
                                         $(IngameView.cmtchtemplate(input)).hide().appendTo(".content").fadeIn(dur);
+                                        self.setScroll();
                                     });
                                     qcount += 1;
                                     break;
@@ -122,6 +137,7 @@ var IngameView = function(id) {
                                         input["answer"] = answers[0];
                                         input["answerl"] = answers[0].txt.length;
                                         $(IngameView.cinputtemplate(input)).hide().appendTo(".content").fadeIn(dur);
+                                        self.setScroll();
                                         //setTimeout(function(){$('.txt_input').autotab_magic().autotab_filter('numeric');},0);
                                     });
                                     qcount += 1;
@@ -137,6 +153,7 @@ var IngameView = function(id) {
                             };
             
                         }
+                    self.setScroll();
                     });
                     if (screen.helptxt != "") {
                         $("#help").show();
