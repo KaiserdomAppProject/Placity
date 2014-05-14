@@ -5,16 +5,13 @@
 /**************
  GENERAL STYLE
 ***************/
+
 .clearfix:after {
+    content:"";
+    display:table;
     clear: both;
 }
 
-.clearfix:before, .clearfix:after {
-    content: " ";
-    display: block;
-    height: 0px;
-    overflow: hidden;
-}
 * {
     margin: 0;
     padding: 0;
@@ -109,7 +106,8 @@ h1 {
     width: 100%;
     top: 0px;
     bottom: 50px;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     z-index: -1;
 }
 
@@ -555,7 +553,8 @@ h1 {
     position: relative;
     max-height: 70%;
     -webkit-transition-duration: 2s;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .popup {
@@ -654,6 +653,7 @@ h1 {
     position: relative;
     display: block;
     color: black;
+    text-decoration: none;
 }
 
 li {
@@ -674,8 +674,9 @@ li {
 }
 
 .list-text {
-    margin: 10px 10px 10px 0;
+    margin: 10px 10px 10px 100px;
     position: relative;
+    text-align: justify;
 }
 .list-text span {
     width: 100%;
@@ -731,7 +732,8 @@ li {
 }
 
 #DOWNLOAD-wrap {
-    overflow: hidden;   
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;  
     max-height: 125px;
 }
 
@@ -795,7 +797,8 @@ li {
     position: absolute;
     background-color: white;
     padding: 10px 5% 0 5%;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #settingsframe {
@@ -806,7 +809,8 @@ li {
     position: absolute;
     background-color: white;
     padding: 0 5% 0 5%;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     text-align: center;
 }
 
