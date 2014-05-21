@@ -216,20 +216,20 @@
         
         <script id="content-txt-tpl" type="text/x-handlebars-template">
             <div class="contents content_txt" id="{{content_id}}">
-                {{txt}}
+                {{check txt}}
             </div>
         </script>
         
         <script id="content-txtblock-tpl" type="text/x-handlebars-template">
             <div class="contents content_txtblock" id="{{content_id}}">
-                {{txt}}
+                {{check txt}}
             </div>
         </script>
         
         <script id="content-dialog-tpl" type="text/x-handlebars-template">
             <div class="contents content_dialog" id="{{content_id}}">
                 <img class="avatar" src="{{src}}" style="float: {{orientation}};"/>
-                <p class="dialogtxt" style="float: {{orientation}};">{{txt}}</p>
+                <p class="dialogtxt" style="float: {{orientation}};">{{check txt}}</p>
                 <div class="clearfix"></div> 
             </div>
         </script>
@@ -288,7 +288,7 @@
                     {{#each answers}}
                         <li class="answer">
                             <input class="checkbox" type="checkbox" id="mt{{@index}}" name="mtaw" value="{{value}}"/>
-                            <label for="mt{{@index}}">{{txt}}</label>
+                            <label for="mt{{@index}}">{{check txt}}</label>
                         </li>
                     {{/each}}
                 </ul>        
@@ -302,7 +302,7 @@
                     {{#each answers}}
                         <li class="answer">
                             <input type="radio" id="sg{{@index}}" name="sgaw" value="{{value}}"/>
-                            <label for="sg{{@index}}">{{txt}}</label>
+                            <label for="sg{{@index}}">{{check txt}}</label>
                         </li>
                     {{/each}}
                 </ul>        

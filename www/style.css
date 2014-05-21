@@ -1356,11 +1356,11 @@ input[type="radio"]:checked + label:before {
 
 #points {
     position: absolute;
-    width: 40px;
+    width: 120px;
     height: 50px;
     line-height: 40px;
     margin-left: 50%;
-    left: -20px;
+    left: -60px;
     text-align: center;
     color: #c5c5c5;
     font-weight: bold;
