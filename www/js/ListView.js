@@ -25,7 +25,7 @@ var ListView = function() {
     
     this.registerEvents = function() {
         this.el.on("click", "#scan-btn", function(){window.location.hash = "#scan"});
-        this.el.on("click", "#demo", function(){if (app.network != "none") {app.openPopup("#download", {id:132});
+        this.el.on("click", "#demo", function(){if (app.network != "none") {app.openPopup("#download", {id:326});
                                                                                        } else {
                                                                                             app.showAlert("Keine Internetverbindung verfügbar!", "FEHLER");   
                                                                                        }

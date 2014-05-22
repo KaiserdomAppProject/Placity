@@ -189,21 +189,21 @@ var IngameView = function(id) {
                     
                     case "6.0":
                         var a = $("input:checked");
-                        var c = 0;
+                        var r = 0;
+                        var f = 0;
                         for (p=0;p<a.length;p++) {
                             if (a[p].value=="true"){
-                                this.points += parseInt(this.currentContents[i].answers[p].points);
-                                c++;
+                                r++;
                             } else {
-                                this.points -= parseInt(this.currentContents[i].answers[p].points);
-                                c--;
+                                f++;
                             }
                         }
-                        if (c < 0) {
-                            c *= -1;
-                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, c+" Falsch!");
-                        } else if (c > 0){
-                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, c+" Richtig!");   
+                        if (f = 0) {
+                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
+                            this.points += r*parseInt(this.currentContents[i].answers[p].points);
+                        } else {
+                            app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, "Falsch!");
+                            this.points -= f*parseInt(this.currentContents[i].answers[p].points);
                         } 
                         break;
                         
