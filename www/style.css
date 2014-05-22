@@ -895,6 +895,10 @@ li {
     pointer-events: none;
 }
 
+.settings_checkbox {
+    right: 0px;
+}
+
 .settings_checkbox + label:before {
     content: "";
     display: block;
