@@ -198,7 +198,7 @@ var IngameView = function(id) {
                                 f++;
                             }
                         }
-                        if (f = 0) {
+                        if (f == 0) {
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
                             this.points += r*parseInt(this.currentContents[i].answers[p].points);
                         } else {

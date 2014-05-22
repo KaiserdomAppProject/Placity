@@ -892,6 +892,7 @@ li {
     display: block;
     height: 30px;
     position: relative;
+    pointer-events: none;
 }
 
 .settings_checkbox + label:before {
@@ -904,6 +905,7 @@ li {
     right: 0;
     top: 50%;
     margin-top: -7px;
+    pointer-events: none;
 }
 
 .settings_checkbox:checked + label:before {
@@ -920,6 +922,7 @@ li {
     margin-top: -17px;
     color: #eee;
     -webkit-transform: scale(-1,1) rotate(-45deg);
+    pointer-events: none;
 }
 
 #scan {
@@ -1268,6 +1271,7 @@ input {
     left: 0;
     top: 50%;
     margin-top: -7px;
+    pointer-events: none;
 }
 
 .checkbox:checked + label:before {
@@ -1276,7 +1280,10 @@ input {
 
 input[type="radio"], input[type="checkbox"] {
     position: absolute;
-    visibility: hidden;
+    width: 100px;
+    height: 35px;
+    opacity: 0;
+    -webkit-appearance: none;
 }
 
 input[type="radio"] + label:before {
@@ -1290,6 +1297,7 @@ input[type="radio"] + label:before {
     top: 50%;
     margin-top: -7px;
     -webkit-border-radius: 7px;
+    pointer-events: none;
 }
 
 input[type="radio"]:checked + label:before {
