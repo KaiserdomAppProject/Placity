@@ -5,16 +5,13 @@
 /**************
  GENERAL STYLE
 ***************/
+
 .clearfix:after {
+    content:"";
+    display:table;
     clear: both;
 }
 
-.clearfix:before, .clearfix:after {
-    content: " ";
-    display: block;
-    height: 0px;
-    overflow: hidden;
-}
 * {
     margin: 0;
     padding: 0;
@@ -109,7 +106,8 @@ h1 {
     width: 100%;
     top: 0px;
     bottom: 50px;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     z-index: -1;
 }
 
@@ -555,7 +553,8 @@ h1 {
     position: relative;
     max-height: 70%;
     -webkit-transition-duration: 2s;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .popup {
@@ -654,6 +653,7 @@ h1 {
     position: relative;
     display: block;
     color: black;
+    text-decoration: none;
 }
 
 li {
@@ -674,8 +674,9 @@ li {
 }
 
 .list-text {
-    margin: 10px 10px 10px 0;
+    margin: 10px 10px 10px 100px;
     position: relative;
+    text-align: justify;
 }
 .list-text span {
     width: 100%;
@@ -731,7 +732,8 @@ li {
 }
 
 #DOWNLOAD-wrap {
-    overflow: hidden;   
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;  
     max-height: 125px;
 }
 
@@ -795,7 +797,8 @@ li {
     position: absolute;
     background-color: white;
     padding: 10px 5% 0 5%;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #settingsframe {
@@ -806,7 +809,8 @@ li {
     position: absolute;
     background-color: white;
     padding: 0 5% 0 5%;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     text-align: center;
 }
 
@@ -888,6 +892,11 @@ li {
     display: block;
     height: 30px;
     position: relative;
+    pointer-events: none;
+}
+
+.settings_checkbox {
+    right: 0px;
 }
 
 .settings_checkbox + label:before {
@@ -900,6 +909,7 @@ li {
     right: 0;
     top: 50%;
     margin-top: -7px;
+    pointer-events: none;
 }
 
 .settings_checkbox:checked + label:before {
@@ -916,6 +926,7 @@ li {
     margin-top: -17px;
     color: #eee;
     -webkit-transform: scale(-1,1) rotate(-45deg);
+    pointer-events: none;
 }
 
 #scan {
@@ -1264,6 +1275,7 @@ input {
     left: 0;
     top: 50%;
     margin-top: -7px;
+    pointer-events: none;
 }
 
 .checkbox:checked + label:before {
@@ -1272,7 +1284,10 @@ input {
 
 input[type="radio"], input[type="checkbox"] {
     position: absolute;
-    visibility: hidden;
+    width: 100px;
+    height: 35px;
+    opacity: 0;
+    -webkit-appearance: none;
 }
 
 input[type="radio"] + label:before {
@@ -1286,6 +1301,7 @@ input[type="radio"] + label:before {
     top: 50%;
     margin-top: -7px;
     -webkit-border-radius: 7px;
+    pointer-events: none;
 }
 
 input[type="radio"]:checked + label:before {
@@ -1352,11 +1368,11 @@ input[type="radio"]:checked + label:before {
 
 #points {
     position: absolute;
-    width: 40px;
+    width: 120px;
     height: 50px;
     line-height: 40px;
     margin-left: 50%;
-    left: -20px;
+    left: -60px;
     text-align: center;
     color: #c5c5c5;
     font-weight: bold;

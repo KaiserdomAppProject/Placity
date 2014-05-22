@@ -41,7 +41,22 @@ var app = {
             if (txt.toLowerCase() == "text angeben") {
                 return new Handlebars.SafeString("");
             } else {
-                return new Handlebars.SafeString(txt);
+                var ntxt;
+                var dateobj = new Date();
+                var time = dateobj.toLocaleTimeString("de-DE", {hour:"2-digit",minute:"2-digit"});
+                var date = dateobj.toLocaleDateString("de-DE");
+                var day = dateobj.toLocaleDateString("de-DE", {weekday: "long"});
+                var month = dateobj.toLocaleDateString("de-DE", {month: "long"});
+                ntxt = txt.replace(/#qe\(0\)(?!#[1-9])/g, "&");
+                ntxt = ntxt.replace(/#qe\(0\)#39/g, "'");
+                ntxt = ntxt.replace(/\!\!Uhrzeit/g, time);
+                ntxt = ntxt.replace(/\!\!Datum/g, date);
+                ntxt = ntxt.replace(/\!\!Tag/g, day);
+                ntxt = ntxt.replace(/\!\!Monat/g, month);
+                ntxt = ntxt.replace(/\!\!Seite/g, (app.currentPage.state+1));
+                ntxt = ntxt.replace(/\!\!Punkte/g, app.currentPage.points);
+                ntxt = ntxt.replace(/\!\!Name/g, app.dataInterface.getSyncValue("userName"));
+                return new Handlebars.SafeString(ntxt);
             };
            });
     },

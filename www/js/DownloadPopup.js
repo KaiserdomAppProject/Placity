@@ -34,7 +34,6 @@ var DownloadPopup = function(data) {
                     } else {
                            
                     }
-                    self.setScroll();
                 }); 
             }
         });
@@ -48,15 +47,6 @@ var DownloadPopup = function(data) {
         /*setTimeout(function() {
             $(".popup-content").append("<button type='button' class='button link'>Abbruch</button>");
         }, 5000);*/
-    };
-    
-    this.setScroll = function() {
-        var self = this;
-        if (self.myscroll) {
-            setTimeout(function(){self.myscroll.refresh();}, 0);
-        } else {
-            setTimeout(function(){self.myscroll = new IScroll($('#DOWNLOAD-wrap', self.el)[0]);}, 0);
-        }  
     };
     
     this.registerEvents = function() {
