@@ -25,6 +25,7 @@ var IngameView = function(id) {
                 self.renderContents();   
             }
         });
+        var FLAG_help = false;
     };
     
     this.render = function() {
@@ -191,6 +192,7 @@ var IngameView = function(id) {
         var act_points = this.points;
         var self = this;
         for (i=0; i<this.currentContents.length; i++) {
+            if (FLAG_help) this.currentContents[i].answers[p].points = round(this.currentContents[i].answers[p].points/2);
             switch (this.currentContents[i].type) {
                     case "5.0":
                         var a = $("input:checked");
@@ -215,12 +217,13 @@ var IngameView = function(id) {
                                 f++;
                             }
                         }
-                        if (f == 0) {
+                        if (f == 0 && r == 0) {
+                            break;
+                        } else if (f == 0) {
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].cmessage, "Richtig!");
                             this.points += r*parseInt(this.currentContents[i].answers[p].points);
                         } else {
                             app.showAlert(self.currentContents[i].message + "\n" + self.currentContents[i].wmessage, "Falsch!");
-                            this.points -= f*parseInt(this.currentContents[i].answers[p].points);
                         } 
                         break;
                         
@@ -253,7 +256,8 @@ var IngameView = function(id) {
     };
     
     this.nextScreen = function() {
-        this.state++; 
+        this.state++;
+        FLAG_help = false;
         this.renderContents();
     };
     
@@ -335,7 +339,7 @@ var IngameView = function(id) {
         
         this.el.on("click", "#nextScreen", $.proxy(function(){this.calculatePoints(); this.nextScreen();}, this));
         this.el.on("click", "#lastScreen", $.proxy(function(){this.lastScreen();}, this));
-        this.el.on("click", "#help", $.proxy(function(){app.showAlert(this.currentScreen.helptxt, "TIPP");}, this));
+        this.el.on("click", "#help", $.proxy(function(){app.showAlert(this.currentScreen.helptxt, "TIPP"); FLAG_help = true;}, this));
         this.el.on("click", ".qr_scan", $.proxy(function(){this.scanCode();}, this));
         this.el.on("click", "#mobV", $.proxy(function(){app.dataInterface.setValue("mobileVideo", "true", $.proxy(function() {this.renderContents();}, this));}, this));
         this.el.on("click", ".txt_input", function(e) {e.target.focus(); e.target.select();});

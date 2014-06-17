@@ -1257,19 +1257,19 @@ input {
 .answer label {
     display: table-cell;
     vertical-align: middle;
-    padding-left: 21px;
+    padding-left: 28px;
 }
 
 .checkbox + label:before {
     content: "";
     display: block;
     position: absolute;
-    height: 14px;
-    width: 14px;
+    height: 20px;
+    width: 20px;
     background: #c5c5c5;
     left: 0;
     top: 50%;
-    margin-top: -7px;
+    margin-top: -10px;
     pointer-events: none;
 }
 
@@ -1289,13 +1289,13 @@ input[type="radio"] + label:before {
     content: "";
     display: block;
     position: absolute;
-    height: 14px;
-    width: 14px;
+    height: 20px;
+    width: 20px;
     background: #e0e0e0;
     left: 0;
     top: 50%;
-    margin-top: -7px;
-    -webkit-border-radius: 7px;
+    margin-top: -10px;
+    -webkit-border-radius: 10px;
     pointer-events: none;
 }
 
